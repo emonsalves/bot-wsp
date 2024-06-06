@@ -23,3 +23,5 @@ yarn-debug.log*
 yarn-error.log*
 
 /bot_sessions/*
+core.class.log
+queue.class.log
