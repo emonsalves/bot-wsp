@@ -10,7 +10,7 @@ const flowPrincipal = addKeyword(["hola"]).addAnswer("Hola, soy un chat bot dise
 const flowPrincipal2 = addKeyword(["amor"]).addAnswer("Hola, BB, ¿Cómo estás? ¿En qué puedo ayudarte?")
 const flowPrincipal3 = addKeyword(["hora"]).addAnswer("La hora actual es: " + new Date().toLocaleTimeString())
 
-// #region OpenAI
+// #region ConexionOpenAI
 // const flowPrincipal = addKeyword(EVENTS.WELCOME)
 // .addAction(async (ctx, ctxFn) => {
 //     const prompt = "Soy un chat bot diseñado para ayudar a los usuarios a resolver sus dudas";
