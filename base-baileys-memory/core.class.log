@@ -1,0 +1,68 @@
+[handleMsg]:  {
+  key: {
+    remoteJid: '56990850357@s.whatsapp.net',
+    fromMe: false,
+    id: '934922BAE42EB9657672D32C4344A721',
+    participant: undefined
+  },
+  messageTimestamp: 1717635907,
+  pushName: 'Verenita',
+  broadcast: false,
+  messageStubType: 2,
+  messageStubParameters: [ 'No session record' ],
+  body: undefined,
+  from: '56990850357'
+}
+[handleMsg]:  {
+  key: {
+    remoteJid: '56990850357@s.whatsapp.net',
+    fromMe: false,
+    id: '934922BAE42EB9657672D32C4344A721',
+    participant: undefined
+  },
+  messageTimestamp: 1717635907,
+  pushName: 'Verenita',
+  broadcast: false,
+  messageStubType: 2,
+  messageStubParameters: [ 'No session record' ],
+  body: undefined,
+  from: '56990850357'
+}
+[handleMsg]:  {
+  key: {
+    remoteJid: '56990850357@s.whatsapp.net',
+    fromMe: false,
+    id: '934922BAE42EB9657672D32C4344A721',
+    participant: undefined
+  },
+  messageTimestamp: 1717635908,
+  pushName: 'Verenita',
+  broadcast: false,
+  message: Message {
+    conversation: 'Hola',
+    messageContextInfo: MessageContextInfo {
+      deviceListMetadata: [DeviceListMetadata],
+      deviceListMetadataVersion: 2
+    }
+  },
+  body: 'Hola',
+  from: '56990850357'
+}
+[QUEUE_SE_ENVIO]:  {
+  ref: 'ans_98277c15-9417-486c-9858-d2665daff515',
+  keyword: 'key_d7446a82-4bae-406f-8c24-77636d88335e',
+  answer: 'Hola, soy un chat bot diseñado para ayudar a los usuarios a resolver sus dudas, estoy en entrenamiento, por favor, se paciente conmigo',
+  options: {
+    media: null,
+    buttons: [],
+    capture: false,
+    child: null,
+    delay: 0,
+    idle: null,
+    ref: null,
+    nested: [],
+    keyword: {},
+    callback: false
+  },
+  refSerialize: '866d938550cd89142ae44ba5323bd8db'
+}
