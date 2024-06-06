@@ -6,24 +6,9 @@ const MockAdapter = require('@bot-whatsapp/database/mock')
 
 const { chat } = require('./scripts/chatGpt.js')
 
-const calculateTimeUntilMidnight = () => {
-    const now = new Date();
-    const midnight = new Date();
-    midnight.setHours(24, 0, 0, 0);
-  
-    const timeDifference = midnight - now;
-  
-    const days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    const minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
-    const seconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
-  
-    return { days, hours, minutes, seconds };
-  };
-
 const flowPrincipal = addKeyword(["hola"]).addAnswer("Hola, soy un chat bot diseñado para ayudar a los usuarios a resolver sus dudas, estoy en entrenamiento, por favor, se paciente conmigo")
 const flowPrincipal2 = addKeyword(["amor"]).addAnswer("Hola, BB, ¿Cómo estás? ¿En qué puedo ayudarte?")
-const flowPrincipal3 = addKeyword(["enzo"]).addAnswer("recuerda quedan para la medianoche: " + calculateTimeUntilMidnight().hours + " horas, " + calculateTimeUntilMidnight().minutes + " minutos y " + calculateTimeUntilMidnight().seconds + " segundos")
+const flowPrincipal3 = addKeyword(["hora"]).addAnswer("La hora actual es: " + new Date().toLocaleTimeString())
 
 // #region OpenAI
 // const flowPrincipal = addKeyword(EVENTS.WELCOME)
