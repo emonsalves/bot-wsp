@@ -30,10 +30,14 @@ const flowNotaDeVoz = addKeyword(EVENTS.VOICE_NOTE)
 const flowRecibirMedia = addKeyword(EVENTS.MEDIA)
     .addAnswer('He recibido tu foto o video')
 
-const flowLlamar = addKeyword('llamar')
-    .addAnswer('Te llamaremos en breve')
+    const flowDireccion = addKeyword('direccion')
+    .addAnswer('Pasaje Hidumea, 4717, Maipu, Santiago, Chile')
     .addAction(async (ctx) => console.log(`Estan llamando desde: ${ctx.from}`))
 
+const flowLlamar = addKeyword('llamarme')
+    .addAnswer(`Te llamaremos en breve`)
+    .addAction(async (ctx) => console.log(`Estan llamando desde: ${ctx.from}`))
+    
 const flowEmail = addKeyword('email')
     .addAction(async (_, { flowDynamic }) => {
         return await flowDynamic('Por favor, ingresa tu email')
@@ -43,12 +47,12 @@ const flowEmail = addKeyword('email')
         return await flowDynamic(`Tu email es: ${mensaje}`)
     })
 
-// #region ConexionOpenAI
-const flowOpenAi = addKeyword("ia")
-    .addAction(async (ctx, ctxFn) => {
-        const prompt = "¿Qué es una IA?"
+    const flowAyuda = addKeyword('ayuda')
+    .addAction(async (ctx, { flowDynamic }) => {
+        return await flowDynamic('Soy un Asistente Virtual ¿En qué puedo ayudarte?')
+    })
+    .addAction({ capture: true }, async (ctx,ctxFn ) => {
         const text = ctx.body
-
         const conversations = []
 
         const contextMessages = conversations.flatMap((conversation) => [
@@ -58,10 +62,29 @@ const flowOpenAi = addKeyword("ia")
 
         contextMessages.push({ role: 'user', content: text })
 
-        const response = await chat(prompt, contextMessages)
+        const response = await chat(text, contextMessages)
 
         await ctxFn.flowDynamic(response)
     })
+// #region ConexionOpenAI
+// const flowOpenAi = addKeyword("ia")
+//     .addAction(async (ctx, ctxFn) => {
+//         const prompt = "¿Qué es una IA?"
+//         const text = ctx.body
+
+//         const conversations = []
+
+//         const contextMessages = conversations.flatMap((conversation) => [
+//             { role: 'user', content: conversation.question },
+//             { role: 'assistant', content: conversation.answer }
+//         ])
+
+//         contextMessages.push({ role: 'user', content: text })
+
+//         const response = await chat(prompt, contextMessages)
+
+//         await ctxFn.flowDynamic(response)
+//     })
 
 // #endregion
 
@@ -72,13 +95,15 @@ const main = async () => {
         flowSaludo,
         flowAmor,
         flowHora,
-        flowDocumento,
+        // flowDocumento,
         flowLocation,
-        flowNotaDeVoz,
-        flowRecibirMedia,
+        // flowNotaDeVoz,
+        // flowRecibirMedia,
         flowLlamar,
         flowEmail,
-        flowOpenAi
+        // flowOpenAi,
+        flowAyuda,
+        flowDireccion
     ])
 
     const adapterProvider = createProvider(BaileysProvider)

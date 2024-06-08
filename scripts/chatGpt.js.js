@@ -11,14 +11,12 @@ const chat = async (prompt, messages) => {
         const completion = await openai.chat.completions.create({
             model: "gpt-3.5-turbo",
             messages: [
-                {
-                    role: "system",
-                    content: prompt
-                },
+                { role: "system", content: prompt },
                 ...messages
             ],
         });
-        const answ = completion.data.choices[0].message.content;
+        console.log(completion);
+        const answ = completion.choices[0].message.content;
         return answ;
     }
     catch (error) {
