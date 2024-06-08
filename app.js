@@ -30,28 +30,29 @@ const flowNotaDeVoz = addKeyword(EVENTS.VOICE_NOTE)
 const flowRecibirMedia = addKeyword(EVENTS.MEDIA)
     .addAnswer('He recibido tu foto o video')
 
-    const flowDireccion = addKeyword('direccion')
+const flowDireccion = addKeyword('direccion')
     .addAnswer('Pasaje Hidumea, 4717, Maipu, Santiago, Chile')
     .addAction(async (ctx) => console.log(`Estan llamando desde: ${ctx.from}`))
 
-const flowLlamar = addKeyword('llamarme')
-    .addAnswer(`Te llamaremos en breve`)
-    .addAction(async (ctx) => console.log(`Estan llamando desde: ${ctx.from}`))
-    
-const flowEmail = addKeyword('email')
-    .addAction(async (_, { flowDynamic }) => {
-        return await flowDynamic('Por favor, ingresa tu email')
-    })
-    .addAction({ capture: true }, async (ctx, { flowDynamic }) => {
-        const mensaje = ctx.body
-        return await flowDynamic(`Tu email es: ${mensaje}`)
+const flowLlamar = addKeyword('llamame')
+    .addAction({ capture: true }, async (ctx, ctxFn) => {
+        return await ctxFn.flowDynamic(`Estan llamando desde: ${ctx.from}`)
     })
 
-    const flowAyuda = addKeyword('ayuda')
-    .addAction(async (ctx, { flowDynamic }) => {
-        return await flowDynamic('Soy un Asistente Virtual ¿En qué puedo ayudarte?')
+const flowEmail = addKeyword('email')
+    .addAction(async (_, ctxFn) => {
+        return await ctxFn.flowDynamic('Por favor, ingresa tu email')
     })
-    .addAction({ capture: true }, async (ctx,ctxFn ) => {
+    .addAction({ capture: true }, async (ctx, ctxFn) => {
+        const mensaje = ctx.body
+        return await ctxFn.flowDynamic(`Tu email es: ${mensaje}`)
+    })
+
+const flowAyuda = addKeyword('ayuda')
+    .addAction(async (_, ctxFn) => {
+        return await ctxFn.flowDynamic('Soy un Asistente Virtual ¿En qué puedo ayudarte?')
+    })
+    .addAction({ capture: true }, async (ctx, ctxFn) => {
         const text = ctx.body
         const conversations = []
 
@@ -103,7 +104,7 @@ const main = async () => {
         flowEmail,
         // flowOpenAi,
         flowAyuda,
-        flowDireccion
+        flowDireccion,
     ])
 
     const adapterProvider = createProvider(BaileysProvider)
