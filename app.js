@@ -32,12 +32,12 @@ const flowRecibirMedia = addKeyword(EVENTS.MEDIA)
 
 const flowDireccion = addKeyword('direccion')
     .addAnswer('Pasaje Hidumea, 4717, Maipu, Santiago, Chile')
-    .addAction(async (ctx) => console.log(`Estan llamando desde: ${ctx.from}`))
 
 const flowLlamar = addKeyword('llamame')
-    .addAction({ capture: true }, async (ctx, ctxFn) => {
-        return await ctxFn.flowDynamic(`Estan llamando desde: ${ctx.from}`)
+    .addAction(async (ctx, ctxFn) => {
+        return await ctxFn.flowDynamic(`Usted esta llamando desde: +${ctx.from}, en breve le contactamos.`)
     })
+    // .addAction(async (ctx) => console.log(`Estan llamando desde: ${ctx.from}`))
 
 const flowEmail = addKeyword('email')
     .addAction(async (_, ctxFn) => {
@@ -50,7 +50,7 @@ const flowEmail = addKeyword('email')
 
 const flowAyuda = addKeyword('ayuda')
     .addAction(async (_, ctxFn) => {
-        return await ctxFn.flowDynamic('Soy un Asistente Virtual ¿En qué puedo ayudarte?')
+        return await ctxFn.flowDynamic('Soy Negroni, tu Asistente Virtual ¿En qué puedo ayudarte?')
     })
     .addAction({ capture: true }, async (ctx, ctxFn) => {
         const text = ctx.body
